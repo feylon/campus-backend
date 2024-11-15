@@ -73,6 +73,7 @@ const swaggerOptions = {
   apis: [
     "./Routers/Admin/*.js",
     "./Routers/Admin/CRUD Admin/*.js",
+    "./Routers/admin/student Groups/Crud Group/*.js",
 
         // // Admin rollari
         // "./Routers/admin/login.js",

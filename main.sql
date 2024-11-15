@@ -298,3 +298,11 @@ lastseen timestamp
 ;
 insert into admin (email, login, password, firstname, brithday,struct, tuman_id, viloyat_id) values
 ('jamshid14092002@gmail.com','jamshid14092002','$2b$10$qszd/we2sPerBlHoeUKageRfkVnM9T5LUndqxhgli3NmJdTHRhbOG', 'Jamshid', '14-09-2002', true, 118,8 );
+
+-- Stundents and groups
+Create table group_name_student(
+id bigserial primary key,
+name varchar(500) unique not null,   
+created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+description TEXT
+);
