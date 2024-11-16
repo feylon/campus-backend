@@ -10,6 +10,10 @@ import edit_role from "./CRUD Admin/EditRole.js";
 
 import addGroupStudent from "./student Groups/Crud Group/add.js";
 import editGroupEdit from "./student Groups/Crud Group/edit.js"
+
+// Studentni qo'shish
+import addstudent from "./student Groups/CRUD student/add.js"
+
 export default [
 
     {path : "login", component : login},
@@ -23,5 +27,7 @@ export default [
     {path : "edit_role", component : edit_role},
 
     {path : "addGroupStudent", component : addGroupStudent},
-    {path : "editGroupStudent", component : editGroupEdit}
+    {path : "editGroupStudent", component : editGroupEdit},
+
+    {path : "addstudent", component : addstudent}
 ]

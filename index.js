@@ -121,3 +121,4 @@ const PORT = process.env.PORT || 3000;
 let host = '10.10.11.93:51' || '192.168.20.102';
 const server = http.createServer(app)
 server.listen(PORT,  ()=>console.log(`Server is running:  ${host}:${process.env.PORT}` ));
+export default app;

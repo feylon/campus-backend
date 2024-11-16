@@ -254,23 +254,6 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 insert into admin_role (name) values
 ('Oddiy Admin');
 
--- SELECT 
---         admin.login as admin_login,
---         admin.firstname as admin_firstname,
---         admin.lastname as admin_lastname,
--- 		admin_role.name as adminName,
---         viloyat.name_uz as viloyat_uz,
---         viloyat.name_oz as viloyat_oz,
---         viloyat.name_ru as viloyat_ru,
---         tuman.name_uz as tuman_uz,
---         tuman.name_oz as tuman_oz,
---         tuman.name_ru as tuman_ru
---         FROM admin
---         inner join viloyat on admin.viloyat_id = viloyat.id
---         inner join tuman on admin.tuman_id = tuman.id
--- 		inner join admin_role on admin.role_id = admin_role.id
--- 		where admin.id = 1
--- -- Select * from admin
 -- Admin
 create table admin (
 id bigserial primary key,
@@ -306,3 +289,40 @@ name varchar(500) unique not null,
 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 description TEXT
 );
+
+
+-- Student
+CREATE TYPE typestudy AS ENUM ('Grant', 'Kontrakt');
+
+Create table student (
+
+id bigserial primary key,
+email varchar(500) not null unique,
+login varchar(500) not null unique,
+password varchar(500) not null,
+telegramID integer unique,	
+
+
+	
+Parent_Name varchar(500),
+firstname varchar(500),
+lastname varchar(500),
+type_study typestudy not null default 'Grant',
+course integer not null check (0 < course and course < 8), 
+brithday DATE,
+
+group_name_id integer not null default 8,
+FOREIGN KEY (group_name_id) REFERENCES group_name_student (id),
+viloyat_id integer not null default 8,
+FOREIGN KEY (viloyat_id) REFERENCES viloyat (id),
+tuman_id integer not null default 122,
+FOREIGN KEY (tuman_id) REFERENCES tuman (id),
+address varchar(500),
+	
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+created_by integer,
+FOREIGN KEY (created_by) REFERENCES admin (id),
+state BOOLEAN DEFAULT true,
+active boolean default true,
+struct boolean default false,
+lastseen timestamp);
