@@ -74,7 +74,7 @@ const swaggerOptions = {
     "./Routers/Admin/*.js",
     "./Routers/Admin/CRUD Admin/*.js",
     "./Routers/admin/student Groups/Crud Group/*.js",
-
+    "./Routers/admin/student Groups/CRUD student/*.js",
         // // Admin rollari
         // "./Routers/admin/login.js",
         // "./Routers/admin/CRUD Admin/add.js",

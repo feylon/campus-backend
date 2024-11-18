@@ -13,6 +13,9 @@ import editGroupEdit from "./student Groups/Crud Group/edit.js"
 
 // Studentni qo'shish
 import addstudent from "./student Groups/CRUD student/add.js"
+import editstudent from "./student Groups/CRUD student/editstudent.js"
+import getstudent from "./student Groups/CRUD student/getstudent.js"
+import deleteStudent from "./student Groups/CRUD student/deleteStudent.js"
 
 export default [
 
@@ -29,5 +32,8 @@ export default [
     {path : "addGroupStudent", component : addGroupStudent},
     {path : "editGroupStudent", component : editGroupEdit},
 
-    {path : "addstudent", component : addstudent}
+    {path : "addstudent", component : addstudent},
+    {path : "editstudent", component : editstudent},
+    {path : "getstudent", component : getstudent},
+    {path : "deleteStudent", component : deleteStudent}
 ]

@@ -38,7 +38,9 @@ router.put("/:id", checktoken, async function (req, res) {
     });
 
     if (fields.length === 0) {
-      return res.status(400).json({ error: "Hech qanday ma'lumot yuborilmagan" });
+      return res
+        .status(400)
+        .json({ error: "Hech qanday ma'lumot yuborilmagan" });
     }
 
     values.push(studentId);
@@ -59,6 +61,9 @@ router.put("/:id", checktoken, async function (req, res) {
     if (err.code === "22P02") {
       return res.status(400).send({ error: "ID noto‘g‘ri formatda" });
     }
+    if (err.code == "23505") return res.status(400).send({ error: err.detail });
+    if (err.code == "23503") return res.status(400).send({ error: err.detail });
+    if (err.code == "22P02") return res.status(400).send({ error: err.detail });
     console.error(err);
     res.status(500).json({ error: "Serverda xatolik yuz berdi" });
   }

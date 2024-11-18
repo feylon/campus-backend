@@ -68,6 +68,7 @@ let created_by = getid(req, res);
         if(err.code == "23505") return res.status(400).send({error : err.detail});
         if(err.code == "23503") return res.status(400).send({error : err.detail});
         if(err.code == "22P02") return res.status(400).send({error : err.detail});
+        
 
 
     console.error(err);
