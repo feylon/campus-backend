@@ -77,7 +77,7 @@ const swaggerOptions = {
     ],
   },
   apis: [
-    "./Routers/Admin/*.js",
+    "./Routers/Admin/free data/../*.js",
     "./Routers/Admin/CRUD Admin/*.js",
     "./Routers/admin/student Groups/Crud Group/*.js",
     "./Routers/admin/student Groups/CRUD student/*.js",
