@@ -123,7 +123,7 @@ import { url } from "inspector";
 
 admin.forEach(item=>app.use(`/admin/${item.path}`, item.component))
 dotenv.config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 let host = '10.10.11.93:51' || '192.168.20.102';
 const server = http.createServer(app)
