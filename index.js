@@ -15,17 +15,17 @@ import pool from "./functions/database.js";
 
 
 // global.pool = pool;
-(async ()=>{
+// (async ()=>{
     
-    try {
-       let data = await pool.query(`
+//     try {
+//        let data = await pool.query(`
         
-        ;Select * from admin;`);
-        console.log(data.rows)
-    } catch (error) {
-        console.log(error)
-    }
-})()
+//         ;Select * from admin;`);
+//         console.log(data.rows)
+//     } catch (error) {
+//         console.log(error)
+//     }
+// })()
 
 
 
@@ -54,8 +54,12 @@ const swaggerOptions = {
     },
     servers: [
       {
+      url : "https://campus-backend-qxl2.onrender.com"
+      },
+      {
         url: "http://localhost:4100",
       },
+
     ],
     components: {
       securitySchemes: {
@@ -113,6 +117,7 @@ app.use((err, req, res, next) => {
 
 // Routers
 import admin from "./Routers/admin/index.js"
+import { url } from "inspector";
 
 
 
