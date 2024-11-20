@@ -15,15 +15,17 @@ import pool from "./functions/database.js";
 
 
 // global.pool = pool;
-// (async ()=>{
+(async ()=>{
     
-//     try {
-//        let data = await pool.query("Select * from admin;");
-//         console.log(data.rows)
-//     } catch (error) {
-//         console.log(error)
-//     }
-// })()
+    try {
+       let data = await pool.query(`
+        
+        ;Select * from admin;`);
+        console.log(data.rows)
+    } catch (error) {
+        console.log(error)
+    }
+})()
 
 
 
