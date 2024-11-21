@@ -1,5 +1,8 @@
 import login from "./login.js";
 import profile from "./profile.js";
+import change_password from "./changepasswordAdmin.js"
+
+
 import addAdmin from "./CRUD Admin/add.js";
 import hasadmin from "./CRUD Admin/checker.js";
 import deleteadmin from "./CRUD Admin/deleteadmin.js"
@@ -21,6 +24,7 @@ export default [
 
     {path : "login", component : login},
     {path : "profile", component : profile},
+    {path : "change-password", component : change_password},
     {path : "addadmin", component : addAdmin},
     {path : "hasadmin", component : hasadmin},
     {path : "deleteadmin", component : deleteadmin},

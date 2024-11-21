@@ -83,6 +83,7 @@ const swaggerOptions = {
     "./Routers/admin/CRUD Admin/deleteadmin.js",
     "./Routers/admin/CRUD Admin/get.js",
     "./Routers/admin/profile.js",
+    "./Routers/admin/changepasswordAdmin.js",
     "./Routers/admin/CRUD Admin/get_roles.js",
 
 

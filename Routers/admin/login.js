@@ -1,7 +1,7 @@
 import { Router } from "express";
 import Joi from "joi";
 import pool from "../../functions/database.js";
-import { check } from "../../functions/bcrypt.js";
+import { check, hashpassword } from "../../functions/bcrypt.js";
 import { sign } from "../../functions/jwtAdmin.js";
 
 const router = Router();
