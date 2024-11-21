@@ -77,18 +77,21 @@ const swaggerOptions = {
     ],
   },
   apis: [
-    "./Routers/Admin/free data/../*.js",
-    "./Routers/Admin/CRUD Admin/*.js",
+    "./Routers/admin/login.js",
+    "./Routers/admin/CRUD Admin/add.js",
+    "./Routers/admin/CRUD Admin/checker.js",
+    "./Routers/admin/CRUD Admin/deleteadmin.js",
+    "./Routers/admin/CRUD Admin/get.js",
+    "./Routers/admin/profile.js",
+    "./Routers/admin/CRUD Admin/get_roles.js",
+
+
+    
+    "./Routers/Admin/free data/*.js",
+    // "./Routers/Admin/CRUD Admin/*.js",
     "./Routers/admin/student Groups/Crud Group/*.js",
     "./Routers/admin/student Groups/CRUD student/*.js",
         // // Admin rollari
-        // "./Routers/admin/login.js",
-        // "./Routers/admin/CRUD Admin/add.js",
-        // "./Routers/admin/CRUD Admin/checker.js",
-        // "./Routers/admin/CRUD Admin/deleteadmin.js",
-        // "./Routers/admin/CRUD Admin/get.js",
-        // "./Routers/admin/profile.js",
-        // "./Routers/admin/CRUD Admin/get_roles.js",
         // // free regions
 
         "./Routers/admin/free data/regions.js"
