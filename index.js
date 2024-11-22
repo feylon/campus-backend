@@ -54,11 +54,11 @@ const swaggerOptions = {
     },
     servers: [
       {
-      url : "https://campus-backend-qxl2.onrender.com"
-      },
-      {
         url: "http://localhost:4100",
       },
+      {
+      url : "https://campus-backend-qxl2.onrender.com"
+      }
 
     ],
     components: {
@@ -85,7 +85,8 @@ const swaggerOptions = {
     "./Routers/admin/profile.js",
     "./Routers/admin/changepasswordAdmin.js",
     "./Routers/admin/CRUD Admin/get_roles.js",
-
+    "./Routers/admin/CRUD Admin/addRole.js",
+    "./Routers/admin/CRUD Admin/EditRole.js.js",
 
     
     "./Routers/Admin/free data/*.js",
@@ -95,7 +96,10 @@ const swaggerOptions = {
         // // Admin rollari
         // // free regions
 
-        "./Routers/admin/free data/regions.js"
+        "./Routers/admin/free data/regions.js",
+
+        // Teachers uchun 
+    "./Routers/admin/CRUD_Teacher/*.js"    
   ],
 };
 

@@ -20,6 +20,9 @@ import editstudent from "./student Groups/CRUD student/editstudent.js"
 import getstudent from "./student Groups/CRUD student/getstudent.js"
 import deleteStudent from "./student Groups/CRUD student/deleteStudent.js"
 
+// teacher qo'shish
+import addteacher from "./CRUD_Teacher/addTeacher.js"
+
 export default [
 
     {path : "login", component : login},
@@ -39,5 +42,9 @@ export default [
     {path : "addstudent", component : addstudent},
     {path : "editstudent", component : editstudent},
     {path : "getstudent", component : getstudent},
-    {path : "deleteStudent", component : deleteStudent}
+    {path : "deleteStudent", component : deleteStudent},
+
+// teacher qo'shish
+    {path : "addteacher", component : addteacher}
+
 ]

@@ -326,3 +326,40 @@ state BOOLEAN DEFAULT true,
 active boolean default true,
 struct boolean default false,
 lastseen timestamp);
+
+-- Update [21 - XI 2024]
+create table teacher (
+id bigserial primary key,
+email varchar(500) not null unique,
+login varchar(500) not null unique,
+password varchar(500) not null,
+telegramID integer unique,	
+firstname varchar(500),
+lastname varchar(500),
+brithday DATE,
+address varchar(500),
+viloyat_id integer,
+FOREIGN KEY (viloyat_id) REFERENCES viloyat (id),
+tuman_id integer,
+FOREIGN KEY (tuman_id) REFERENCES tuman (id),
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+Parent_Name varchar(500),
+created_by integer,
+FOREIGN KEY (created_by) REFERENCES admin (id),
+state BOOLEAN DEFAULT true,
+active boolean default true,
+struct boolean default false,
+lastseen timestamp
+);
+
+
+ALTER TABLE group_name_student
+ADD COLUMN teacher_id INTEGER;
+
+ALTER TABLE group_name_student
+ADD CONSTRAINT fk_teacher
+FOREIGN KEY (teacher_id) REFERENCES teacher(id) ON DELETE CASCADE;
+
+
+
+-- * ended update

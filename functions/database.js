@@ -5,13 +5,13 @@ dotenv.config();
 const { user, database_PORT, password, host, database, DatabaseURL} = process.env;
 const { Pool } = pkg;
 const pool = new Pool({
-  // host,
-  // database,
-  // user,
-  // password,
-  // port: database_PORT,
-  connectionString : DatabaseURL,
-  ssl : true
+  host,
+  database,
+  user,
+  password,
+  port: database_PORT,
+  // connectionString : DatabaseURL,
+  // ssl : truez
 });
 
 export default pool;
