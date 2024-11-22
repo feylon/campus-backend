@@ -2,6 +2,7 @@ import Joi from "joi";
 import { Router } from "express";
 import { checktoken } from "../../../functions/jwtAdmin.js";
 import pool from "../../../functions/database.js";
+
 import { limiter } from "../../../functions/limiter.js";
 
 const router = Router();
@@ -12,6 +13,7 @@ const Schema = Joi.object({
   viloyat_id: Joi.number().min(0).max(14).required().integer(),
   tuman_id: Joi.number().min(15).max(225).integer().required(),
   active: Joi.boolean().required(),
+  telegramID: Joi.number().integer().allow(null),
   birthday: Joi.date().allow(null),
   address: Joi.string().max(500).allow(null),
   Parent_Name: Joi.string().max(500).allow(null),
@@ -31,59 +33,60 @@ router.put("/:id", [limiter, checktoken], async function (req, res, next) {
       viloyat_id,
       tuman_id,
       active,
+      telegramID,
       birthday,
       address,
       Parent_Name,
       struct,
     } = req.body;
 
-    const teacherId = req.params.id;
+    const teacherId = req.params.id; 
+ 
 
-    // Check if the teacher exists
-    const checkTeacherQuery = `SELECT id FROM teacher WHERE id = $1`;
-    const teacherResult = await pool.query(checkTeacherQuery, [teacherId]);
-
-    if (teacherResult.rows.length === 0) {
-      return res.status(404).json({ error: "Teacher not found" });
-    }
-
-    // Update the teacher's details
     const query = `
       UPDATE teacher
-      SET
+      SET 
         firstname = $1,
         lastname = $2,
         viloyat_id = $3,
         tuman_id = $4,
         active = $5,
-        birthday = $6,
-        address = $7,
-        Parent_Name = $8,
-        struct = $9
-      WHERE id = $10
+        telegramID = $6,
+        brithday = $7,
+        address = $8,
+        Parent_Name = $9,
+        struct = $10
+       
+      WHERE id = $11
       RETURNING id;
     `;
+
     const values = [
       firstname,
       lastname,
       viloyat_id,
       tuman_id,
       active,
+      telegramID || null,
       birthday || null,
       address || null,
       Parent_Name || null,
       struct,
+      
       teacherId,
     ];
 
     const result = await pool.query(query, values);
+    const updatedTeacherId = result.rows[0].id;
 
-    // Respond with the updated teacher's ID
     return res.status(200).json({
-      message: "Teacher successfully updated",
-      teacherId: result.rows[0].id,
+      message: "O'qituvchi ma'lumotlari yangilandi",
+      teacherId: updatedTeacherId,
     });
   } catch (err) {
+    if (err.code == "23505") return res.status(400).send({ error: err.detail });
+    if (err.code == "23503") return res.status(400).send({ error: err.detail });
+    if (err.code == "22P02") return res.status(400).send({ error: err.detail });
     console.error(err);
     return res.status(500).json({ error: "Server error" });
   }
@@ -93,75 +96,114 @@ export default router;
 
 /**
  * @swagger
- * /admin/editteacher/{id}:
- *   put:
- *     summary: O'qituvchini tahrirlash
- *     description: O'qituvchining ma'lumotlarini yangilash.
- *     parameters:
- *       - name: id
- *         in: path
- *         description: O'qituvchining ID raqami
+ * openapi: 3.0.0
+ * info:
+ *   title: O'qituvchi API
+ *   description: O'qituvchilarni boshqarish uchun API
+ *   version: 1.0.0
+ * paths:
+ *   /admin/editteacher/{id}:
+ *     put:
+ *       summary: O'qituvchining ma'lumotlarini yangilash
+ *       description: O'qituvchining mavjud ma'lumotlarini yangilaydi.
+ *       tags:
+ *         - O'qituvchilar
+ *       parameters:
+ *         - name: id
+ *           in: path
+ *           required: true
+ *           description: O'qituvchining ID raqami
+ *           schema:
+ *             type: integer
+ *       requestBody:
  *         required: true
- *         schema:
- *           type: integer
- *       - name: firstname
- *         in: body
- *         description: O'qituvchining ismi
- *         required: true
- *         schema:
- *           type: string
- *       - name: lastname
- *         in: body
- *         description: O'qituvchining familiyasi
- *         required: true
- *         schema:
- *           type: string
- *       - name: viloyat_id
- *         in: body
- *         description: Viloyat ID
- *         required: true
- *         schema:
- *           type: integer
- *       - name: tuman_id
- *         in: body
- *         description: Tuman ID
- *         required: true
- *         schema:
- *           type: integer
- *       - name: active
- *         in: body
- *         description: O'qituvchi faolmi yoki yo'qligi
- *         required: true
- *         schema:
- *           type: boolean
- *       - name: birthday
- *         in: body
- *         description: O'qituvchining tug'ilgan sanasi
- *         schema:
- *           type: string
- *           format: date
- *       - name: address
- *         in: body
- *         description: O'qituvchining manzili
- *         schema:
- *           type: string
- *       - name: Parent_Name
- *         in: body
- *         description: O'qituvchining ota-onasi ismi
- *         schema:
- *           type: string
- *       - name: struct
- *         in: body
- *         description: Struktura holati
- *         schema:
- *           type: boolean
- *     responses:
- *       200:
- *         description: O'qituvchi muvaffaqiyatli yangilandi
- *       400:
- *         description: Xato ma'lumotlar
- *       404:
- *         description: O'qituvchi topilmadi
- *       500:
- *         description: Server xatosi
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               required:
+ *                 - firstname
+ *                 - lastname
+ *                 - viloyat_id
+ *                 - tuman_id
+ *                 - active
+ *               properties:
+ *                 firstname:
+ *                   type: string
+ *                   minLength: 3
+ *                   maxLength: 15
+ *                   description: O'qituvchining ismi.
+ *                 lastname:
+ *                   type: string
+ *                   minLength: 3
+ *                   maxLength: 15
+ *                   description: O'qituvchining familiyasi.
+ *                 viloyat_id:
+ *                   type: integer
+ *                   minimum: 0
+ *                   maximum: 14
+ *                   description: Viloyat ID raqami.
+ *                 tuman_id:
+ *                   type: integer
+ *                   minimum: 15
+ *                   maximum: 225
+ *                   description: Tuman ID raqami.
+ *                 active:
+ *                   type: boolean
+ *                   description: O'qituvchining faol holati.
+ *                 telegramID:
+ *                   type: integer
+ *                   nullable: true
+ *                   description: O'qituvchining Telegram ID raqami.
+ *                 birthday:
+ *                   type: string
+ *                   format: date
+ *                   nullable: true
+ *                   description: O'qituvchining tug'ilgan kuni.
+ *                 address:
+ *                   type: string
+ *                   maxLength: 500
+ *                   nullable: true
+ *                   description: O'qituvchining manzili.
+ *                 Parent_Name:
+ *                   type: string
+ *                   maxLength: 500
+ *                   nullable: true
+ *                   description: Ota-onaning yoki vasiyning ismi.
+ *                 struct:
+ *                   type: boolean
+ *                   default: false
+ *                   description: Strukturaviy holatini bildiradi.
+ *       responses:
+ *         200:
+ *           description: O'qituvchi muvaffaqiyatli yangilandi
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   message:
+ *                     type: string
+ *                     example: O'qituvchi ma'lumotlari yangilandi
+ *                   teacherId:
+ *                     type: integer
+ *                     description: Yangilangan o'qituvchining ID raqami.
+ *         400:
+ *           description: Xato so'rov, validatsiya yoki baza xatosi tufayli
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   error:
+ *                     type: string
+ *         500:
+ *           description: Ichki server xatosi
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   error:
+ *                     type: string
  */
