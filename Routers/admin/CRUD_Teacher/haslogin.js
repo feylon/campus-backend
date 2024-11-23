@@ -10,7 +10,7 @@ const Schema = Joi.object({
   login: Joi.string().min(5).max(15).required(),
 });
 
-router.post("/check-login", [limiter, checktoken], async function (req, res, next) {
+router.post("/", [limiter, checktoken], async function (req, res, next) {
   try {
     
     const { error } = Schema.validate(req.body);
@@ -38,10 +38,14 @@ export default router;
 
 /**
  * @swagger
- * /admin/check-login:
+ * /admin/checkloginTeacher:
  *   post:
+ *     tags:
+ *       - O'qituvchilar
  *     summary: Tekshirish login mavjudligi
  *     description: O'qituvchining login ma'lumotingiz bazada mavjudligini tekshirish.
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:

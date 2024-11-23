@@ -40,8 +40,7 @@ router.put("/:id", [limiter, checktoken], async function (req, res, next) {
       struct,
     } = req.body;
 
-    const teacherId = req.params.id; 
- 
+    const teacherId = req.params.id;
 
     const query = `
       UPDATE teacher
@@ -57,7 +56,7 @@ router.put("/:id", [limiter, checktoken], async function (req, res, next) {
         Parent_Name = $9,
         struct = $10
        
-      WHERE id = $11
+      WHERE id = $11 and state = true
       RETURNING id;
     `;
 
@@ -72,11 +71,13 @@ router.put("/:id", [limiter, checktoken], async function (req, res, next) {
       address || null,
       Parent_Name || null,
       struct,
-      
+
       teacherId,
     ];
-
     const result = await pool.query(query, values);
+    if (result.rows.length == 0)
+      return res.status(400).send({ error: "ID topilmadi" });
+
     const updatedTeacherId = result.rows[0].id;
 
     return res.status(200).json({
