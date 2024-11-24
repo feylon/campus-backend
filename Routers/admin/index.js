@@ -26,6 +26,9 @@ import editteacher from "./CRUD_Teacher/editteacher.js"
 import deleteteacher from "./CRUD_Teacher/deleteTeacher.js"
 import getTeachers from "./CRUD_Teacher/getTeachers.js"
 import checkloginTeacher from "./CRUD_Teacher/haslogin.js"
+
+//Teacherni o'rnatish
+import setTeacher from "./student Groups/Crud Group/setTeacher.js"
 export default [
 
     {path : "login", component : login},
@@ -52,5 +55,6 @@ export default [
     {path : "editteacher", component : editteacher},
     {path : "deleteteacher", component : deleteteacher},
     {path : "getTeachers", component : getTeachers},
-    {path : "checkloginTeacher", component : checkloginTeacher}
+    {path : "checkloginTeacher", component : checkloginTeacher},
+    {path : "setTeacher", component : setTeacher}
 ]

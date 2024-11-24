@@ -54,11 +54,11 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url : "https://campus-backend-qxl2.onrender.com"
-        },
-      {
         url: "http://localhost:4100",
       },
+      {
+        url : "https://campus-backend-qxl2.onrender.com"
+        },
      
 
     ],
