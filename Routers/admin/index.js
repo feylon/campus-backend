@@ -13,6 +13,8 @@ import edit_role from "./CRUD Admin/EditRole.js";
 
 import addGroupStudent from "./student Groups/Crud Group/add.js";
 import editGroupEdit from "./student Groups/Crud Group/edit.js"
+import getGroupsActive from "./student Groups/Crud Group/getStudentGroupsActive.js"
+import getStudentGroupsUnActive from "./student Groups/Crud Group/getStudentGroupsUnActive.js"
 
 // Studentni qo'shish
 import addstudent from "./student Groups/CRUD student/add.js"
@@ -28,7 +30,9 @@ import getTeachers from "./CRUD_Teacher/getTeachers.js"
 import checkloginTeacher from "./CRUD_Teacher/haslogin.js"
 
 //Teacherni o'rnatish
+
 import setTeacher from "./student Groups/Crud Group/setTeacher.js"
+
 export default [
 
     {path : "login", component : login},
@@ -56,5 +60,7 @@ export default [
     {path : "deleteteacher", component : deleteteacher},
     {path : "getTeachers", component : getTeachers},
     {path : "checkloginTeacher", component : checkloginTeacher},
-    {path : "setTeacher", component : setTeacher}
+    {path : "setTeacher", component : setTeacher},
+    {path : "getGroupsActive", component : getGroupsActive},
+    {path : "getGroupsUnActive", component : getStudentGroupsUnActive}
 ]
