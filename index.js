@@ -100,7 +100,12 @@ const swaggerOptions = {
         "./Routers/admin/free data/regions.js",
 
         // Teachers uchun 
-    "./Routers/admin/CRUD_Teacher/*.js"    
+    "./Routers/admin/CRUD_Teacher/*.js"  ,
+    
+    
+
+    // Teacher uchun Routerlar
+    "./Routers/teacher/Auth/*.js"
   ],
 };
 
@@ -126,11 +131,11 @@ app.use((err, req, res, next) => {
 
 // Routers
 import admin from "./Routers/admin/index.js"
-import { url } from "inspector";
-
+import teacher from "./Routers/teacher/index.js"
 
 
 admin.forEach(item=>app.use(`/admin/${item.path}`, item.component))
+teacher.forEach(item=>app.use(`/teacher/${item.path}`, item.component))
 dotenv.config();
 const PORT = process.env.PORT || 4000;
 
