@@ -54,6 +54,9 @@ const swaggerOptions = {
     },
     servers: [
       {
+        url : "http://192.168.137.208:4100/"
+      },
+      {
         url: "http://localhost:4100",
       },
       {
@@ -139,7 +142,7 @@ teacher.forEach(item=>app.use(`/teacher/${item.path}`, item.component))
 dotenv.config();
 const PORT = process.env.PORT || 4000;
 
-let host = '10.10.11.93:51' || '192.168.20.102';
+let host = '192.168.137.208' || '192.168.20.102';
 const server = http.createServer(app)
-server.listen(PORT,  ()=>console.log(`Server is running:  ${host}:${process.env.PORT}` ));
+server.listen(PORT,  ()=>console.log(`Server is running:  http://${host}:${process.env.PORT}/api-docs` ));
 export default app;
